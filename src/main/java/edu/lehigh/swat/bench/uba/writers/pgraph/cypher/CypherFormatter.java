@@ -19,7 +19,7 @@ public class CypherFormatter implements PropertyGraphFormatter {
             output.println();
         }
 
-        output.print("CREATE (:");
+        output.print("CREATE (:e:");
         output.print(n.getProperties().get("type"));
         output.print(" { id:\"");
         output.print(n.getId());
@@ -43,13 +43,13 @@ public class CypherFormatter implements PropertyGraphFormatter {
             output.println();
         }
 
-        output.print("MATCH (a{id:\"");
+        output.print("MATCH (a:e{id:\"");
         output.print(e.getSource());
         output.print("\"}) ");
         output.print("MATCH (b{id:\"");
         output.print(e.getTarget());
         output.print("\"}) ");
-        output.print("MERGE (a)-[:");
+        output.print("MERGE (a:e)-[:");
         output.print(e.getLabel());
         output.print("]->(b);");
     }
