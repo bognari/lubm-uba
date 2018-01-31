@@ -17,7 +17,7 @@ public class CypherConsolidator extends AbstractWriteConsolidator {
     private byte[] PRE_FILE = "\n".getBytes(StandardCharsets.UTF_8);
     private byte[] EDGE_HEADER = "".getBytes(StandardCharsets.UTF_8);
     private byte[] EDGE_FOOTER = "".getBytes(StandardCharsets.UTF_8);
-    private byte[] NODE_HEADER = "CREATE INDEX ON :e(id);\nCREATE CONSTRAINT ON (c:e) ASSERT c.id IS UNIQUE;\n".getBytes(StandardCharsets.UTF_8);
+    private byte[] NODE_HEADER = "CREATE INDEX ON :e(id);\n".getBytes(StandardCharsets.UTF_8);
     private byte[] NODE_FOOTER = "".getBytes(StandardCharsets.UTF_8);
 
     private final Queue<String> files = new LinkedList<>();
