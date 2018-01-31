@@ -45,11 +45,11 @@ public class CypherFormatter implements PropertyGraphFormatter {
 
         output.print("MATCH (a:e{id:\"");
         output.print(e.getSource());
-        output.print("\"}) ");
-        output.print("MATCH (b{id:\"");
+        output.print("\"}), ");
+        output.print(" (b:e{id:\"");
         output.print(e.getTarget());
         output.print("\"}) ");
-        output.print("MERGE (a:e)-[:");
+        output.print("CREATE (a)-[:");
         output.print(e.getLabel());
         output.print("]->(b);");
     }
