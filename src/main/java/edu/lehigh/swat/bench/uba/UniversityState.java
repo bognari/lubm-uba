@@ -15,6 +15,7 @@ import edu.lehigh.swat.bench.uba.writers.NTriplesWriter;
 import edu.lehigh.swat.bench.uba.writers.OwlWriter;
 import edu.lehigh.swat.bench.uba.writers.TurtleWriter;
 import edu.lehigh.swat.bench.uba.writers.Writer;
+import edu.lehigh.swat.bench.uba.writers.pgraph.cypher.CypherWriter;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.GraphMLWriter;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.SegregatedGraphMLWriter;
 import edu.lehigh.swat.bench.uba.writers.pgraph.json.JsonWriter;
@@ -119,6 +120,9 @@ public class UniversityState implements GeneratorCallbackTarget {
             break;
         case JSON:
             writer = new JsonWriter(this);
+            break;
+        case CYPHER:
+            writer = new CypherWriter(this);
             break;
         default:
             throw new RuntimeException("Invalid writer type specified");

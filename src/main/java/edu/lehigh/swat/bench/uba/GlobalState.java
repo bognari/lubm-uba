@@ -1,22 +1,19 @@
 package edu.lehigh.swat.bench.uba;
 
-import java.io.File;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicLong;
 import edu.lehigh.swat.bench.uba.model.Ontology;
 import edu.lehigh.swat.bench.uba.writers.ConsolidationMode;
 import edu.lehigh.swat.bench.uba.writers.WriterType;
+import edu.lehigh.swat.bench.uba.writers.pgraph.cypher.CypherConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.GraphMLConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.GraphMLNodesThenEdgesConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.json.JsonConsolidator;
 import edu.lehigh.swat.bench.uba.writers.utils.SingleFileConsolidator;
 import edu.lehigh.swat.bench.uba.writers.utils.WriteConsolidator;
 import edu.lehigh.swat.bench.uba.writers.utils.WriterPool;
+
+import java.io.File;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class GlobalState {
 
@@ -87,6 +84,7 @@ public class GlobalState {
             case GRAPHML:
             case GRAPHML_NODESFIRST:
             case JSON:
+            case CYPHER:
             case NEO4J_GRAPHML:
                 // All these formats will maximally consolidate regardless,
                 // using
@@ -110,6 +108,7 @@ public class GlobalState {
             case GRAPHML:
             case GRAPHML_NODESFIRST:
             case JSON:
+            case CYPHER:
             case NEO4J_GRAPHML:
                 // All these formats need us to use Partial consolidation as the
                 // primary consolidation
@@ -149,6 +148,11 @@ public class GlobalState {
         case GRAPHML_NODESFIRST:
         case NEO4J_GRAPHML:
             this.writeConsolidator = new GraphMLNodesThenEdgesConsolidator(consolidatedFileName.toString());
+            break;
+        case CYPHER:
+            String file2 = consolidatedFileName.toString();
+            this.writeConsolidator = new CypherConsolidator(file2.replace(ext, "-nodes" + ext),
+                    file2.replace(ext, "-edges" + ext));
             break;
         case JSON:
             String file = consolidatedFileName.toString();
@@ -264,6 +268,9 @@ public class GlobalState {
             return ".graphml";
         case JSON:
             return ".json";
+        case CYPHER:
+            return ".cql";
+
         default:
             throw new RuntimeException("Unknown writer type");
         }

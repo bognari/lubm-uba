@@ -11,8 +11,8 @@ Data Generator for the LUBM Benchmark, this is the original code for the generat
     - Use a proper command line parsing library that provides meaningful built in help and parsing errors
     - New command line options:
         - Added `-o <dir>`/`--output <dir>` option to control where generated data files are written
-        - Added `--format <format>` option to control the output format, supports `OWL`, `DAML`, `NTRIPLES`, `TURTLE`, `GRAPHML`, `GRAPHML_NODESFIRST`, `NEO4J_GRAPHML` and `JSON`
-            - The GraphML and JSON based formats are property graph encodings of the generated dataset
+        - Added `--format <format>` option to control the output format, supports `OWL`, `DAML`, `NTRIPLES`, `TURTLE`, `GRAPHML`, `GRAPHML_NODESFIRST`, `NEO4J_GRAPHML`, `JSON` and `CYPHER`
+            - The GraphML, JSON and Cypher based formats are property graph encodings of the generated dataset
         - Added `--compress` option which compresses output files with GZip as they are generated
         - Added `--consolidate <mode>` option which controls how many files are generates.  `None` generates 1 file per university department, `Partial` generates 1 file per university and `Full` generates a file per thread.  `Maximal` tries to reduce the number of files as far as possible, exact number of files produces depends on the output format.
         - Added `-t <threads>`/`--threads <threads>` option to allow parallel data generation for better performance
