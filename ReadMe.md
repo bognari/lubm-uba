@@ -124,6 +124,19 @@ Remember that you can use the `--output` option to specify where the data files 
 
 Note that at larger scales we would recommend enabling compression regardless because otherwise you are liable to exhaust disk space.
 
+### Cypher
+Please use the Cypher format with `--consolidate Partial` so that you get a separate node and a edge cypher file for every university. Before you import the files please run `CREATE INDEX :d(id);` in neo4j to increase the edge import performance. 
+
+To import the files you can use:
+
+    > for i in {0..XXX}; do \ 
+        date; \ 
+        echo University${i}nodes.cql; \ 
+        cat University${i}nodes.cql | cypher-shell -u USER -p PASSWORD > /dev/null; \ 
+        date; \ 
+        echo University${i}edges.cql; \ 
+        cat University${i}edges.cql | cypher-shell -u USER -p PASSWORD > /dev/null; \ 
+      done
 
 ## Copyright
 

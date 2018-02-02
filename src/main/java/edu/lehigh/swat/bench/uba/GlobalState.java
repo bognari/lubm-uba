@@ -3,7 +3,6 @@ package edu.lehigh.swat.bench.uba;
 import edu.lehigh.swat.bench.uba.model.Ontology;
 import edu.lehigh.swat.bench.uba.writers.ConsolidationMode;
 import edu.lehigh.swat.bench.uba.writers.WriterType;
-import edu.lehigh.swat.bench.uba.writers.pgraph.cypher.CypherConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.GraphMLConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.graphml.GraphMLNodesThenEdgesConsolidator;
 import edu.lehigh.swat.bench.uba.writers.pgraph.json.JsonConsolidator;
@@ -149,11 +148,11 @@ public class GlobalState {
         case NEO4J_GRAPHML:
             this.writeConsolidator = new GraphMLNodesThenEdgesConsolidator(consolidatedFileName.toString());
             break;
-        case CYPHER:
+        /*case CYPHER:
             String file2 = consolidatedFileName.toString();
             this.writeConsolidator = new CypherConsolidator(file2.replace(ext, "-nodes" + ext),
                     file2.replace(ext, "-edges" + ext));
-            break;
+            break;*/
         case JSON:
             String file = consolidatedFileName.toString();
             this.writeConsolidator = new JsonConsolidator(file.replace(ext, "-nodes" + ext),

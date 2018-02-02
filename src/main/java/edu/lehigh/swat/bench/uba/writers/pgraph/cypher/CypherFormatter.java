@@ -59,5 +59,4 @@ public class CypherFormatter implements PropertyGraphFormatter {
         this.firstNode = true;
         this.firstEdge = true;
     }
-
 }
